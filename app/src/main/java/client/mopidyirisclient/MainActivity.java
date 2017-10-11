@@ -130,6 +130,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Handle back button properly
+     */
+    @Override
+    public void onBackPressed() {
+        if (getWeb().canGoBack()) {
+            getWeb().goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    /**
      * These overrides handle redirects on login pages, including Spotify access confirmation
      */
     class UriWebViewClient extends WebViewClient {
