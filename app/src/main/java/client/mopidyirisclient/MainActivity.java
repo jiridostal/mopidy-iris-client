@@ -184,12 +184,13 @@ public class MainActivity extends AppCompatActivity {
         // If URL changed, update it immediately
         super.onResume();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String settingsUrl = pref.getString("settings_iris_url", "");
+        String settingsUrl = pref.getString("settings_iris_url", "").toLowerCase();
         if (!settingsUrl.equals(getIrisUrl())) {
             setIrisUrl(settingsUrl);
             IrisWebviewHelper.refresh();
         }
     }
+
 
     /**
      * Handler for opening login windows

@@ -36,13 +36,15 @@ class IrisWebviewHelper {
 
     public static void setupUrl() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(activity);
-        activity.setIrisUrl(pref.getString("settings_iris_url", ""));
+        activity.setIrisUrl(pref.getString("settings_iris_url", "").toLowerCase());
         activity.setIrisHost(Uri.parse(activity.getIrisUrl()).getHost());
     }
+
     public static void loadIrisUrl(String url) {
         IrisUrlChecker checker = new IrisUrlChecker(activity);
         checker.execute(url);
     }
+
     public static void refresh() {
         IrisWebviewHelper.setupUrl();
         loadIrisUrl(activity.getIrisUrl());
