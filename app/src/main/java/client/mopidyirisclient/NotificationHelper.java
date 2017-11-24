@@ -103,7 +103,7 @@ public class NotificationHelper {
         String body = message.getString("body");
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(activity)
-                        .setSmallIcon(R.drawable.ic_info_black_24dp)
+                        .setSmallIcon(R.drawable.ic_stat_name)
                         .setContentTitle(title)
                         .setDefaults(Notification.DEFAULT_ALL)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
