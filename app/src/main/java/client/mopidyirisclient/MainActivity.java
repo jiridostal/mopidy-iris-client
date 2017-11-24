@@ -14,9 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+
+import tech.gusavila92.websocketclient.WebSocketClient;
 
 public class MainActivity extends AppCompatActivity {
     private static final String JAMESBARNSLEY_HOST = "jamesbarnsley.co.nz";
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private String irisUrl;
     private String irisHost;
     private WebView web;
+    private WebSocketClient webSocketClient;
 
     public String getIrisUrl() {
         return irisUrl;
@@ -86,8 +90,11 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     private String recentUrlHost;
 
+    public WebResourceRequest notif;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setContext(this.getApplicationContext());
@@ -101,8 +108,14 @@ public class MainActivity extends AppCompatActivity {
         // attach View Clients to Web View
         getWeb().setWebViewClient(new UriWebViewClient());
         getWeb().setWebChromeClient(new UriChromeClient());
+        //Setup websocket
+        NotificationHelper.setActivity(this);
+        NotificationHelper.startWebsocket();
         // Finally, load up url
+
         IrisWebviewHelper.loadIrisUrl(getIrisUrl());
+
+
     }
 
     @Override
@@ -111,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+
         return true;
     }
 
@@ -140,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 
     /**
      * These overrides handle redirects on login pages, including Spotify access confirmation
