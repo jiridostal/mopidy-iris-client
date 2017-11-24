@@ -1,5 +1,6 @@
 package client.mopidyirisclient;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -104,6 +105,11 @@ public class NotificationHelper {
                 new NotificationCompat.Builder(activity)
                         .setSmallIcon(R.drawable.ic_info_black_24dp)
                         .setContentTitle(title)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setAutoCancel(true)
+                        .setWhen(System.currentTimeMillis())
+                        .setTicker(title)
                         .setContentText(body);
 
         // Sets an ID for the notification
